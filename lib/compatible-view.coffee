@@ -1,5 +1,7 @@
 {View} = require 'atom'
 
+tMapDe = require './translation-table'
+
 module.exports =
 class CompatibleView extends View
   @content: ->
@@ -7,6 +9,12 @@ class CompatibleView extends View
       @div "The Test package is Alive! It's ALIVE!", class: "message"
 
   initialize: (serializeState) ->
+    console.log tMapDe
+    # atom.keymap.keyBindings = atom.keymap.keyBindings.map((binding, i) ->
+    atom.keymap.keyBindings.map((binding, i) ->
+      # console.log binding.keystrokes
+      console.log binding.index + ': ' + binding.keystrokes + ': ' + binding.command
+    )
     atom.workspaceView.command "compatible:at", @at
     atom.workspaceView.command "compatible:backslash", @backslash
 
